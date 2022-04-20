@@ -9,6 +9,7 @@ contract Inbox {
 
     function setMessage(string newMessage) public {
         message = newMessage;
+        // sets new message, overwriting Inbox
     }
 
 }
