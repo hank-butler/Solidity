@@ -5,12 +5,10 @@ contract Inbox {
 
     function Inbox(string initialMessage) public {
         message = initialMessage;
-        // initial function, sets initialMessage
     }
 
     function setMessage(string newMessage) public {
         message = newMessage;
-        // sets new message, overwriting Inbox
     }
 
 }
