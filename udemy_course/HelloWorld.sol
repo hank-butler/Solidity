@@ -1,23 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >= 0.7.0 < 0.9.0;
 
-interface HelloWolrdInterface{
-function helloWolrd() external view returns (string memory);
-function setText(string memory newText) external;
-}
-
-contract HelloWorld is HelloWolrdInterface {
+contract HelloWorld{
   string private text;
 
+
   constructor() {
-    text = "Hello World";
+    text = pureText();
   }
 
-  function helloWolrd() public view override returns (string memory) {
+  function helloWorld() public view returns (string memory) {
     return text;
   }
 
-  function setText(string memory newText) public override {
+  function setText(string calldata newText) public {
     text = newText;
   }
 }
