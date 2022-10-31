@@ -16,4 +16,16 @@ contract HelloWorld{
   function setText(string calldata newText) public {
     text = newText;
   }
+
+  function pureText() public pure returns (string memory) {
+    return "Hello Wolrd";
+  }
+
+  function _isPure() internal view returns (bool check_) {
+    check_ = keccak256(bytes(text)) == keccak256(bytes(pureText()));
+  }
+
+  function isPure() public view returns (bool returnValue_) {
+    returnValue_ = isPure();
+  }
 }
