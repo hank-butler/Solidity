@@ -19,6 +19,12 @@ contract HelloWorld {
   }
 
   function transferOwnership(address newOwner) public onlyOwner {
-  
+    owner = newOwner;
+  }
+
+  modifier onlyOwner()
+  {
+    require (msg.sender == owner, "Caller is not the owner");
+    _;
   }
 }
