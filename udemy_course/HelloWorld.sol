@@ -28,4 +28,14 @@ contract HelloWorld{
   function isPure() public view returns (bool returnValue_) {
     returnValue_ = isPure();
   }
+
+  function _restore() internal {
+    text = pureText();
+  }
+
+  function restore() public returns (bool) {
+    if (_isPure()) return false;
+    _restore();
+    return true;
+  }
 }
