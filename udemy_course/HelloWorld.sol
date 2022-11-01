@@ -25,6 +25,6 @@ contract HelloWorld {
   modifier onlyOwner()
   {
     require (msg.sender == owner, "Caller is not the owner");
-    _;
+    // _;
   }
 }
