@@ -75,3 +75,25 @@ async function main() {
   console.log(`The ballot smart contract was deployed at ${ballotContract.address}`)
 }
 
+// Adding main() function
+async function main() {
+  console.log("Deploying Ballot contract");
+  console.log("Proposals: ");
+  const proposals = process.argv.slice(2);
+  proposals.forEach((element, index) => {
+    console.log(`Proposal N. ${index + 1}: ${element}`);
+  });
+  const provider = ethers.getDefaultProvider("goerli");
+  const wallet = ethers.Wallet.fromMnemonic(process.env.MNEMONIC ?? "");
+  const signer = wallet.connect(provider);
+  console.log(`Connected to the wallet ${signer.address}`);
+  const balance = await signer.getBalance();
+  console.log(`This address has a balance of ${balance} wei`);
+  if (balance.eq(0)) throw new Error("I'm too poor");
+  const ballotContractFactory = new Ballot__factory(signer);
+  const ballotContract = await ballotContractFactory.deploy(
+    convertStringArrayToBytes32(proposals)
+  );
+  await ballotContract.deployed();
+  console.log(`The ballot smart contract was deployed at ${ballotContract.address}`)
+}
