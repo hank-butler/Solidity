@@ -2,5 +2,7 @@
 pragma solidity ^0.8.17;
 
 contract TokenSale {
-    constructor()
+    constructor(uint256 _ratio) {
+        ratio = _ratio;
+    }
 }
