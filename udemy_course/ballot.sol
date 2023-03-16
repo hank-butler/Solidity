@@ -1,5 +1,5 @@
 pragma solidity ^0.4.14;
-
+// basic contract, simple comment
 contract Inbox {
     string public message;
 
