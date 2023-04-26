@@ -1,3 +1,10 @@
+
+
+'''
+Dapp Uni walkthrough
+
+'''
+
 # Check out simply open auction via vyper docs
 # Set up state variables in contract:
 
@@ -36,3 +43,28 @@ def participate():
     self.funders[nfi] = Funder({sender: msg.sender, value: msg.value})
     # set funder inside mapping and now incrementing
     self.nextFunder = nfi + 1
+
+# finish our crowdfunding, self-destruct and send funds
+@public # declare public
+def finalize():
+    assert block.timestamp >= self.deadline, "deadline not met (yet)"
+    assert self.balance >= self.goal, "invalid balance"
+
+    selfdestruct(self.beneficiary)
+
+# make sure somebody gets paid
+@public # declare it public
+def refund():
+    assert block.timestamp >= self.deadline and self.balance < self.goal
+
+    ind: int128 = self.refundIndex
+
+    for i in range(ind, ind + 30):
+        if i >= self.nextFunderIndex:
+            self.refundIndex = self.nextFunderIndex
+            return
+
+        send(self.funders[i].sender, self.funders[i].value)
+        clear(self.funders[i])
+
+    self.refundIndex = ind + 30
