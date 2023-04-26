@@ -24,3 +24,12 @@ def __init__(_beneficiary: address, _goal: wei_value, _timelimit: timedelta):
     self.deadline = block.timestamp + _timelimit
     self.timelimit = _timelimit
     self.goal = _goal
+
+# new function for participating in crowdfunding
+def participate():
+    # caching value to override in a second
+    nfi: int128 = self.nextFunderIndex
+
+    self.funders[nfi] = Funder({sender: msg.sender, value: msg.value})
+    # set funder inside mapping and now incrementing
+    self.nextFunder = nfi + 1
