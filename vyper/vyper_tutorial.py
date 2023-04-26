@@ -26,7 +26,10 @@ def __init__(_beneficiary: address, _goal: wei_value, _timelimit: timedelta):
     self.goal = _goal
 
 # new function for participating in crowdfunding
+@public
+@payable
 def participate():
+    assert block.timestamp < self.deadline, "deadline not met (yet)"
     # caching value to override in a second
     nfi: int128 = self.nextFunderIndex
 
