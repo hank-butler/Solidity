@@ -14,3 +14,13 @@ deadline: public(timestamp) # access outside contract
 goal: public(wei_value) # goal of the crowdfunding
 refundIndex: int128
 timelimit: public(timedelta) # last point in time to contribute to crowdfunding
+
+# Constructor function for when contract is initialized
+@public
+# variable name, then data type
+def __init__(_beneficiary: address, _goal: wei_value, _timelimit: timedelta):
+    # set things inside constructor, assign state variables to these whenever contract is initialized
+    self.beneficiary = _beneficiary
+    self.deadline = block.timestamp + _timelimit
+    self.timelimit = _timelimit
+    self.goal = _goal
