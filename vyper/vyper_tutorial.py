@@ -62,6 +62,11 @@ def __init__():
 # Let's compile it
 # On local machine we'd type vyper and then the filepath to the file
 # We'll do it on Remix
+# Check the plug-ins and search for Vyper
+# Should see the Vyper logo pop up on the left side
+
+# if we have time, let's do another simple contract
+
 
 
 '''
