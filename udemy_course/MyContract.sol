@@ -7,7 +7,7 @@ contract MyContract {
         value = "Hello, World!";
     }
 
-    
+
     function get() public view returns(string memory) {
         return value;
     }
@@ -16,3 +16,4 @@ contract MyContract {
     }
 }
 
+// Adding a comment for a git check
