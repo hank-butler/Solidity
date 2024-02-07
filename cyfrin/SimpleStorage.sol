@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: MIT 
 pragma solidity 0.8.19; // stating our version
 
 contract SimpleStorage {
     // favoriteNumber initialized at 0 if no value given (0 is default value for uint256)
+    // automatically storage due to being outside function scope
     uint256 myFavoriteNumber; 
 
     // uint256[] listOfFavoriteNumbers; // array of uint256's, [0, 78,90]
@@ -27,6 +29,14 @@ contract SimpleStorage {
         // view => read state from blockchain
     }
 
+    // calldata, memory, storage
+    // calldata, memory are temporary variables
+    // strings are special type, thus specifying calldata or memory
+    // memory can be changed, calldata CANNOT be modified that are tempory
+    // storage is permanent variables that can be changed
+    // uint256 is primitive type, knows where to put it
+    // string is array of bytes, hence memory
+    // storage won't work because of function scope
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
         listOfPeople.push(Person(_favoriteNumber, _name));
     }
