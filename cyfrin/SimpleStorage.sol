@@ -42,3 +42,6 @@ contract SimpleStorage {
     }
     
 }
+
+// Deployed on Sepolia!
+// 'https://sepolia.etherscan.io/tx/0x7ec66eb6e12a17e166e8d307bb46f73fc45349d0a038db483d3bc6c4825dae3d'
