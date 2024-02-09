@@ -18,8 +18,10 @@ contract StorageFactory {
         // Address
 
         // ABI (just need function selector)
-        SimpleStorage mySimpleStorage = listOfSimpleStorageContracts[_simpleStorageIndex];
-        mySimpleStorage.store(_newSimpleStorageNumber);
+        listOfSimpleStorageContracts[_simpleStorageIndex].store(_newSimpleStorageNumber);
+        
+        // SimpleStorage mySimpleStorage = listOfSimpleStorageContracts[_simpleStorageIndex];
+        // mySimpleStorage.store(_newSimpleStorageNumber);
     }
 
     function sfGet(uint256 _simpleStorageIndex) public view returns(uint256){
