@@ -19,7 +19,8 @@ contract SimpleStorage {
     Person[] public listOfPeople;
     // static array Person[3] => max 3 people in array
 
-    function store(uint256 _favoriteNumber) public {
+    function store(uint256 _favoriteNumber) public virtual {
+        // virtual allows store func to be override if inherited (AddFiveStorage.sol)
         myFavoriteNumber = _favoriteNumber;
         
     }
