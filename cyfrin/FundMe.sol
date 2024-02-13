@@ -7,7 +7,15 @@
 pragma solidity ^0.8.18;
 
 contract FundMe {
-    function fund() public {}
+    function fund() public payable {
+        // Minimum funding amt.
+        // payable makes function accept eth
+        // makes contract function like a wallet
+        // msg.value is global
+        require(msg.value > 1e18, "Insufficient eth");
+        
+    }
 
-    function withdraw() public {}
+
+    // function withdraw() public {}
 }
