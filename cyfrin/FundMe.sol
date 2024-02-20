@@ -35,7 +35,13 @@ contract FundMe {
         return uint256(price * 1e10);
     }
 
-    function getConversionRate() public {}
+    function getConversionRate(uint256 ethAmount) public view returns (uint256) {
+        uint256 ethPrice = getPrice();
+        // multiply before dividing because of whole nums in solidity
+        // will make sense in foundry section
+        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18;
+        return ethAmountInUsd;
+    }
 
     function getVersion() public view returns(uint256){
         return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
