@@ -10,15 +10,21 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/Ag
 
 contract FundMe {
 
-    uint256 public minimumUsd = 5;
+    uint256 public minimumUsd = 5e18;
+
+    address[] public funders;
+    mapping(address funder => uint256 amountFunder) public addressToAmountFunded;
 
     function fund() public payable {
         // Minimum funding amt.
         // payable makes function accept eth
         // makes contract function like a wallet
         // msg.value is global
-        require(msg.value >= minimumUsd, "Insufficient funds");
+        require(getConversionRate(msg.value) >= minimumUsd, "Insufficient funds");
         // reverts if require condition not met (returns variable back to original state)
+
+        funders.push(msg.sender);
+        addressToAmountFunded[msg.sender] = addressToAmountFunded[msg.sender] + msg.value;
         
     }
 
