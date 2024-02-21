@@ -27,12 +27,25 @@ contract FundMe {
         
 
         funders.push(msg.sender);
-        addressToAmountFunded[msg.sender] = addressToAmountFunded[msg.sender] + msg.value;
+        addressToAmountFunded[msg.sender] += msg.value;
         
     }
 
 
-    // function withdraw() public {}
+    function withdraw() public {
+        // reset mappings after all money is withdrawn
+        // showing for loop in solidity
+        // for(/* starting index, ending index, step*/)
+        for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
+            address funder = funders[funderIndex];
+            addressToAmountFunded[funder] = 0;
+        }
+        // reset array and withdraw funds
+        funders = new address[](0);
+        // withdraw the funds;
+        
+
+    }
 
     // function getPrice() public view returns(uint256){
     //     // Address 0x694AA1769357215DE4FAC081bf1f309aDC325306
