@@ -42,8 +42,21 @@ contract FundMe {
         }
         // reset array and withdraw funds
         funders = new address[](0);
-        // withdraw the funds;
-        
+        // withdraw the funds
+        // transfer: automatically reverts if transactions fails
+        // msg.sender is type address, payable(msg.sender) is payable which is how to interact with ETH
+        // type casted
+        // payable(msg.sender).transfer(address(this).balance);
+        // // Issues with transfer?
+        // // send returns a bool
+        // bool sendSuccess = payable(msg.sender).send(address(this).balance); 
+        // require(sendSuccess, "Send failed");
+        // // call, first lower level commands we use
+        // // virtually any function in all of Ethereum without ABI!
+        (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}(""/* any function information from other contracts*/);
+        // call function returns two variables, can place in ()
+        require(callSuccess, "Call  failed"); // CALL IS RECOMMENDED FOR ETH OR ERC20
+
 
     }
 
