@@ -16,6 +16,13 @@ contract FundMe {
     address[] public funders;
     mapping(address funder => uint256 amountFunder) public addressToAmountFunded;
 
+    // global variable for owner of contract
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
     function fund() public payable {
         // Minimum funding amt.
         // payable makes function accept eth
@@ -33,6 +40,7 @@ contract FundMe {
 
 
     function withdraw() public {
+        require(msg.sender == owner, "Only owner can call withdraw");
         // reset mappings after all money is withdrawn
         // showing for loop in solidity
         // for(/* starting index, ending index, step*/)
