@@ -1,12 +1,13 @@
+// SPDX-License-Identifier: MIT
 // Get funds from users
 // Withdraw funds
 // Set minimum funding value in USD
 
-// SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.18;
 
 import {PriceConverter} from "./PriceConverter.sol";
+
+error NotOwner();
 
 contract FundMe {
     using PriceConverter for uint256;
@@ -68,7 +69,10 @@ contract FundMe {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == i_owner, "Must be owner");
+        // require(msg.sender == i_owner, "Must be owner");
+        if(msg.sender != i_owner){
+            revert NotOwner(); // saves gas since you don't have to emit string
+        }
         _; // execute function after require is met
     }
 
