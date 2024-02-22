@@ -7,7 +7,7 @@ pragma solidity ^0.8.18;
 
 import {PriceConverter} from "./PriceConverter.sol";
 
-error NotOwner();
+error NotOwner(); // custom error, new since 0.8.4;
 
 contract FundMe {
     using PriceConverter for uint256;
@@ -76,26 +76,16 @@ contract FundMe {
         _; // execute function after require is met
     }
 
-    // function getPrice() public view returns(uint256){
-    //     // Address 0x694AA1769357215DE4FAC081bf1f309aDC325306
-        
-    //     // ABI
-    //     AggregatorV3Interface priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);
-    //     (, int256 price,,,) = priceFeed.latestRoundData();
-    //     // Price of ETH in terms of USD
-    //     return uint256(price * 1e10);
-    // }
+    // What happens if someone sends contract ETH without calling fund function?
+    // if somebody sends ETH to contract w/out calling fund, recieve and fallback route it to fund()
+    receive() external payable {
+        fund();
+    }
+    fallback() external payable {
+        fund();
+    }
+    // special functions
 
-    // function getConversionRate(uint256 ethAmount) public view returns (uint256) {
-    //     uint256 ethPrice = getPrice();
-    //     // multiply before dividing because of whole nums in solidity
-    //     // will make sense in foundry section
-    //     uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18;
-    //     return ethAmountInUsd;
-    // }
-
-    // function getVersion() public view returns(uint256){
-    //     return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
-    // }
+    
 
 }
