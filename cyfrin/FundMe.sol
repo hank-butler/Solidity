@@ -11,16 +11,16 @@ import {PriceConverter} from "./PriceConverter.sol";
 contract FundMe {
     using PriceConverter for uint256;
 
-    uint256 public minimumUsd = 5e18;
+    uint256 public constant MINIMUM_USD = 5e18; // constant no longer takes storage, follow naming convention
 
     address[] public funders;
     mapping(address funder => uint256 amountFunder) public addressToAmountFunded;
 
     // global variable for owner of contract
-    address public owner;
+    address public immutable i_owner; //immutable similar to constant for gas savings.
 
     constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function fund() public payable {
@@ -29,7 +29,7 @@ contract FundMe {
         // makes contract function like a wallet
         // msg.value is global
         // First input variable is type you're importing from library
-        require(msg.value.getConversionRate() >= minimumUsd, "Insufficient funds");
+        require(msg.value.getConversionRate() >= MINIMUM_USD, "Insufficient funds");
         // reverts if require condition not met (returns variable back to original state)
         
 
@@ -39,8 +39,7 @@ contract FundMe {
     }
 
 
-    function withdraw() public {
-        require(msg.sender == owner, "Only owner can call withdraw");
+    function withdraw() public onlyOwner {
         // reset mappings after all money is withdrawn
         // showing for loop in solidity
         // for(/* starting index, ending index, step*/)
@@ -68,6 +67,11 @@ contract FundMe {
 
     }
 
+    modifier onlyOwner() {
+        require(msg.sender == i_owner, "Must be owner");
+        _; // execute function after require is met
+    }
+
     // function getPrice() public view returns(uint256){
     //     // Address 0x694AA1769357215DE4FAC081bf1f309aDC325306
         
@@ -89,4 +93,5 @@ contract FundMe {
     // function getVersion() public view returns(uint256){
     //     return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
     // }
+
 }
