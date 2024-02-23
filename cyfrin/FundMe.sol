@@ -79,9 +79,12 @@ contract FundMe {
     // What happens if someone sends contract ETH without calling fund function?
     // if somebody sends ETH to contract w/out calling fund, recieve and fallback route it to fund()
     receive() external payable {
+        // if someone sends contract ETH without calling function, receive special function call
+        // then route to fund()
         fund();
     }
     fallback() external payable {
+        // fallback is like receive except it has data associated with it
         fund();
     }
     // special functions
