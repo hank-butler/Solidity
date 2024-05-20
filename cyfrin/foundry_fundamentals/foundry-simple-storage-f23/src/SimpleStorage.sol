@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
 
+// anvil to start running local network on foundry
+// forge create <name_of_contract> to deploy on local network
+
+
 contract SimpleStorage {
     uint256 myFavoriteNumber;
 
