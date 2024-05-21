@@ -128,3 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 .DS_Store
+cyfrin/foundry_fundamentals/foundry-simple-storage-f23/remappings.txt
