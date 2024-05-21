@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.19;
+pragma solidity 0.8.19; // version
 
-// anvil to start running local network on foundry
-// forge create <name_of_contract> to deploy on local network
+// anvil to 
+// start running local network on foundry
+// forge create <name_of_contract> --interactive
+// to deploy on local network after inputing private key
 
 
 contract SimpleStorage {
@@ -24,6 +26,6 @@ contract SimpleStorage {
     }
 
     function addPerson(string memory _name, uint256 _favoriteNumber) public {
-        listOfPeople.push(Person(_favoriteNumber, _name));
+        listOfPeople.push(Person(_favoriteNumber, _name)); //.push is how you add to an array, think .append() in python
     }
 }
