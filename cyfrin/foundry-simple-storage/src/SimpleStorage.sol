@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 
+// forge create <name_of_contract> --rpc-url <localhost_anvil> --interactive
+// then enter private key!
+
 pragma solidity 0.8.19; // solidity version, tells compiler what version to use
 
 contract SimpleStorage {
